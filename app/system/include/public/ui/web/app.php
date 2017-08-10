@@ -113,10 +113,20 @@ EOT;
 	}else{
 		require_once $this->template('tem/head');
 		
+        $file=PATH_TEM.'/min/compress.class.php';
+
+		if(!file_exists($file)){
 		require_once $this->template('ui/sidebar');
-		
+        }
+
 		require_once $this->template($control['content']); 
+		
+		if(!file_exists($file)){
 		require_once $this->template('ui/gap');
+         }
+		
+		
+		
 		require_once $this->template('tem/foot');
 	}
 }else{

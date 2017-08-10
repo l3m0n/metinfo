@@ -167,10 +167,11 @@ class upfile {
 				@unlink($filear['tmp_name']); //Delete temporary files
 			}
 		}
-		
+		load::plugin('doqiniu_upload',0,array('savename'=>str_replace(PATH_WEB, '', $this->savepath).$this->savename,'localfile'=>$file_name));
 		$back = '../'.str_replace(PATH_WEB, '', $this->savepath).$this->savename;
 		return $this->sucess($back);
 	}
+
 
 	/**
 	 * 获取后缀

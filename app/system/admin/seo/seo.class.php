@@ -109,7 +109,7 @@ class seo extends admin {
 				$httpdurl ='.htaccess';
 				$httpd    = $htaccess;	
 			}
-			else if(stristr($_SERVER['SERVER_SOFTWARE'],'IIS/7')){
+			else if(stristr($_SERVER['SERVER_SOFTWARE'],'IIS')){
 				$web = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 				$web.= '<configuration>'."\n";
 				$web.= '<system.webServer>'."\n";

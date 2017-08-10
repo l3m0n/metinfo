@@ -184,8 +184,31 @@ if($search=="search" && $mdmendy){
 if($mdmendy)$serchpage .= "&searchtype=".$searchtype;
 if($met_member_use==2)$serch_sql .= " and access<=$metinfo_member_type";
 $order_sql=$class3?list_order($class_list[$class3]['list_order']):($class2?list_order($class_list[$class2]['list_order']):list_order($class_list[$class1]['list_order']));
-$order_sql=($search=="search" && $mdmendy)?" order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc":$order_sql;
+
+
+if($_M[form][asct]=="asc"){
+	$searchtime="desc";
+}elseif($_M[form][asct]=="desc"){
+	$searchtime="asc";
+}else{
+	$searchtime="";
+}
+
+if($_M[form][ascp]=="asc"){
+	$searchprice="desc";
+}elseif($_M[form][ascp]=="desc"){
+	$searchprice="asc";
+}else{
+	$searchprice="";
+}
+
+$order_sql=($search=="search" && $mdmendy)?" order by top_ok desc,com_ok desc,no_order desc,updatetime {$searchtime},id desc":$order_sql;
 $order_sql=$order_sql==''?" order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc":$order_sql;
+
+//$order_sql=($search=="search" && $mdmendy)?" order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc":$order_sql;
+//$order_sql=$order_sql==''?" order by top_ok desc,com_ok desc,no_order desc,updatetime desc,id desc":$order_sql;
+
+
 if($mdname=='news'||$mdname=='product'||$mdname=='download'||$mdname=='img'||$mdname=='job'){
 		$serch_sql .=" and displaytype='1'";
 }
@@ -265,6 +288,18 @@ require_once '../include/pager.class.php';
 	while($list= $db->fetch_array($result)){
 		$modlistnow[]=$list;
 	}
+  $query= "select * from $met_parameter where name like '价格%'";
+  $search_coloumns=$db->get_one($query);
+  $paraid='para'.$search_coloumns[id];
+
+  if($_M[form][$paraid]=="" && $met_shopv2_product){
+   	foreach ($modlistnow as $key => $value) {
+   		 $rangid.= $value[id].',';
+  	}
+   $rangid=substr($rangid, 0,-1);
+      $query="select * from $met_product left join $met_shopv2_product on $met_product.id=$met_shopv2_product.pid where $met_product.id in ($rangid) order by price {$searchprice}";
+    $modlistnow = $db->get_all($query);
+}
 	if($temporary_plugin_product_list == 1){
 		$modlistnow =$newclass->temporary_plugin_product_analysis($modlistnow);
 	}
@@ -428,6 +463,13 @@ if($search=='search' && $mdmendy){
 		$hz = '';
 		$page_list = $rowset->link($pagemor,$hz);
 	}
+
+
+
+
+
+
+
 	if($temporary_plugin_product_list == 1){
 		$pagemor = $newclass->temporary_plugin_product_page();
 		if($pagemor){
@@ -436,6 +478,13 @@ if($search=='search' && $mdmendy){
 		}
 	}
 }
+
+
+
+
+
+
+
 
 if($mdmendy){
 	$dbpagename = $mdname=='product'?$met_product_page:($mdname=='download'?$met_download_page:$met_img_page);

@@ -12,13 +12,17 @@ define(function(require, exports, module) {
 				a.func($('body'));
 			});
 		}
-		/*编辑器*/
+		
+		var edturl;
+		require.async('edturl/compatible');
+		/*编辑器
 		var editor = $('textarea.ckeditor');
 		if(editor.length){
-			require.async('epl/editor/ueditor/ueditor.config');
-			require.async('epl/editor/ueditor/ueditor.all.min',function(){
+			require.async('edturl/ueditor.config');
+			require.async('edturl/ueditor.all.min',function(){
 				editor.each(function(){
 					var name = $(this).attr('name')
+				
 					$(this).attr("id",'container_'+name);
 					var ue = UE.getEditor('container_'+name,{
 						iframeCssUrl: siteurl + 'app/system/include/public/bootstrap/css/bootstrap.min.css',
@@ -28,7 +32,7 @@ define(function(require, exports, module) {
 					});
 				});
 			});
-		}
+		}*/
 		/*返回顶部*/
 		require('epl/include/jquery.goup');
 		$(document).ready(function () {

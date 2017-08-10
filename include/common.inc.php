@@ -17,6 +17,7 @@ error_reporting(E_ERROR | E_PARSE);
 @set_time_limit(0);
 $HeaderTime=time();
 define('ROOTPATH', substr(dirname(__FILE__), 0, -7));
+define ('PATH_WEB', substr(dirname(__FILE__),0,-7));
 PHP_VERSION >= '5.1' && date_default_timezone_set('Asia/Shanghai');
 session_cache_limiter('private, must-revalidate'); 
 @ini_set('session.auto_start',0); 

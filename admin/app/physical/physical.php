@@ -114,6 +114,9 @@ if($action=="do"){
 		$localurl="http://";
 		$localurl.=$_SERVER['HTTP_HOST'].$_SERVER["PHP_SELF"];
 		$localurl=str_replace($met_adminfile."/app/physical/physical.php","",$localurl);
+		  if(substr($localurl,-1)!="/"){
+              $localurl=$localurl.'/';
+		  }
 		$physical_web=$localurl==$met_weburl?"1":"0";
 	}
 	$physical_web=$physical_web==null?"-1":$physical_web;

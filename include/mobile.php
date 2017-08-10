@@ -46,14 +46,15 @@ function mobilejump($tp){
 	global $met_wap_tpa,$met_wap_tpb,$met_wap_url,$met_wap,$met_mobileok,$lang,$index,$db;
 	$met_mobileok=$tp?$met_mobileok:0;
 	if($met_wap&&!$met_mobileok){
-		$Loaction = $index?'wap/index.php?lang='.$lang:'../wap/index.php?lang='.$lang;
+		//$Loaction = $index?'wap/index.php?lang='.$lang:'../wap/index.php?lang='.$lang;
+         $Loaction  ='index.php?lang='.$lang.'&met_mobileok=1';
 		if($met_wap_tpa==1){
 			$ua = strtolower($_SERVER['HTTP_USER_AGENT']);
 			if($_SERVER['HTTP_USER_AGENT']){
 				$uachar = "/(nokia|sony|ericsson|mot|samsung|sgh|lg|philips|panasonic|alcatel|lenovo|cldc|midp|mobile|wap|Android|ucweb)/i";
 				if(($ua == '' || preg_match($uachar, $ua))&& !strpos(strtolower($_SERVER['REQUEST_URI']),'wap')){
 					if (!empty($Loaction)){
-						if($met_wap_tpb==1&&$met_wap_url!='')$Loaction=$met_wap_url.$Loaction;
+						//if($met_wap_tpb==1&&$met_wap_url!='') $Loaction=$met_wap_url.$Loaction;
 						$Loaction = trim($Loaction);
 						header("Location: $Loaction");
 						exit;

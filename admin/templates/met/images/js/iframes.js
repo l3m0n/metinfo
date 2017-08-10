@@ -415,7 +415,8 @@ function metuploadify(id, type, ureturn, module, wate, fileExt, fileDesc) {
 	var depths = depth + '../include/uploadify.php'+'?type='+type+'&wate='+wate+'&module='+module+'&lang='+lang;
 	var tips = module == 67 ? $('#uptips-' + upload_type) : $(id).parent().parent().next('.uptips');
 	//$(".metuplaodify").width($(".metuplaodify .upbutn").outerWidth());
-	$(id).change(function(){ 
+	$(id).change(function(){
+	    if($(this).val()!=''){
 		$(id).attr('name','Filedata');
 		$("#upfileForm"+upload_type).ajaxSubmit({
 			type: "post",
@@ -455,6 +456,7 @@ function metuploadify(id, type, ureturn, module, wate, fileExt, fileDesc) {
 		return false;
 		
 		$("#upfileForm"+upload_type).submit();
+	}
 	});
 	$("div.file_uploadfrom").css("opacity", "0");
 	if (module == 67) $("div.metuplaodify").css("opacity", "0");

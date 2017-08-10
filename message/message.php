@@ -95,13 +95,29 @@ if($action=="add"){
 		sendsms($tel,$met_fd_sms_content,4);
 	}
 	/**/
-	$customerid=$metinfo_member_name!=''?$metinfo_member_name:0;
-	$query = "INSERT INTO $met_message SET
+	$query = "select * from $met_parameter where lang='$lang' and module='7'";
+	$result = $db->get_all($query);
+      $countsum=1;
+
+	foreach($result as $key=>$val){
+
+			$infos ="para".$val[id];
+			$info=$$infos;
+			if($val['wr_ok'] == 1 || $countsum == 1){
+				if($info !=''&&$countsum==1){
+					$customerid=$metinfo_member_name!=''?$metinfo_member_name:0;
+	                 $query = "INSERT INTO $met_message SET
 						  ip                 = '$ip',
 						  addtime            = '$addtime',
 						  lang               = '$lang', 
 						  customerid 		 = '$customerid'";
-	$db->query($query);
+						  
+	             $db->query($query);
+	             $countsum=$countsum+1;
+
+				}
+			}
+		}
 	$news_id=$db->insert_id();
 	$fname=$db->get_one("select * from $met_column where module='7' and lang='$lang'");
 	$news_type = "message-".$class1;

@@ -63,6 +63,7 @@ function metlabel_html5($closure=1,$iehack=1,$mobile=0){
 		if(!$met_headstat=="")$metinfo.="\n$met_headstat";
 		}
 	}
+	$metinfo.="<script src=\"{$navurl}public/js/video.js\" type=\"text/javascript\"></script>\n";
 	if($closure)$metinfo.="\n</head>";
 	return $metinfo;
 }

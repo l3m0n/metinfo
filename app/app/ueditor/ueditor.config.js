@@ -20,7 +20,7 @@
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
-		URL = window.siteurl + 'app/system/include/public/js/examples/editor/ueditor/';
+		URL = window.siteurl + 'app/app/ueditor/';
 
     /**
      * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。

@@ -19,6 +19,7 @@ echo <<<EOT
 			<div class="row">
 <!--
 EOT;
+
 foreach($appl as $key=>$val){
 if($val['update'] && $_M['config']['met_agents_app'] && ($privilege['navigation'] == 'metinfo' || strstr($privilege['navigation'], '1507'))){
 	$val['updatehtml'] = "<li class=\"update hidden\" id=\"{$val['no']}\" data-ver=\"{$val['ver']}\"><a href=\"{$val['update']}\"><span class=\"glyphicon glyphicon-arrow-up\"></span>{$_M['word']['appupgrade']}</a></li>";
@@ -27,12 +28,20 @@ if($val['uninstall'] && $_M['config']['met_agents_app'] && ($privilege['navigati
 	$val['uninstallhtml'] = "<li class=\"uninstall\"><a href=\"{$val['uninstall']}\" data-confirm=\"{$_M['word']['app_datele']}\"><span class=\"glyphicon glyphicon-trash\"></span>{$_M['word']['dlapptips6']}</a></li>";
 }
 $val['info'] = get_word($val['info']);
+  
+
+  if($val['target']){
+	 $target="target='_blank'";
+  }
+
 /*
 if(strstr($val[info],"lang_")){
 	$info = explode('lang_',$val[info]);
 	$val['info'] = get_word($_M['word'][$info[1]]);
 }
 */
+
+if($val['display']==1){
 echo <<<EOT
 -->
 				<div class="col-md-4 col-sm-6 col-xs-12 index_stat_chart">
@@ -44,7 +53,7 @@ echo <<<EOT
 						</div>
 						<div class="media-body">
 							<ul class="media-tool">{$val['updatehtml']}{$val['uninstallhtml']}</ul>
-							<a href="{$val['url']}">
+							<a href="{$val['url']}" {$target}>
 								<h4 class="media-heading">{$val[appname]}</h4>
 								<p>{$val[info]}</p>
 							</a>
@@ -53,6 +62,7 @@ echo <<<EOT
 				</div>
 <!--
 EOT;
+}
 }
 echo <<<EOT
 -->

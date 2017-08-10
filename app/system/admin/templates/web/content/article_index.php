@@ -8,7 +8,7 @@ require $this->template('ui/head');
 echo <<<EOT
 -->
 <link rel="stylesheet" href="{$_M[url][own_tem]}css/metinfo.css?{$jsrand}" />
-<form method="POST" class="ui-from" name="myform" action="{$_M[url][own_form]}a=dolistsave" target="_self">
+<form method="POST" class="ui-from" name="myform" action="{$_M[url][own_form]}a=dolistsave&sub_type=editor" target="_self">
 <div class="v52fmbx product_index">
 	<div class="v52fmbx-table-top">
 		<div class="ui-float-left">

@@ -30,8 +30,19 @@ echo <<<EOT
 					<input type="hidden" name="class" value='' />
 					<span class="tips" style="display:block; margin-top:5px;">按住 Ctrl 可以多选</span>
 				</div>
-				<span class="tips pull-left" style="margin-left:20px;"><a href="{$_M[url][site_admin]}index.php?lang=cn#metnav_25" target="_blank">栏目管理</a></span>
+<!--
+EOT;
+	
+if(in_array('metinfo',$arrlanguage)||in_array('1201',$arrlanguage)){
+echo <<<EOT
+-->
+		<span class="tips pull-left" style="margin-left:20px;"><a href="{$_M[url][site_admin]}index.php?lang={$_M[lang]}#metnav_25" target="_blank">栏目管理</a></span>
 			</dd>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
 		</dl>
 		<dl>
 			<dt><em class="required">*</em>商品名称</dt>

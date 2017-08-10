@@ -156,26 +156,7 @@ echo <<<EOT
 							</a>
 						</div>
 					</div>
-				</div>
-
-				<!---
-				<div class="col-md-4 col-sm-6 col-xs-12">
-					<div class="media">
-						<div class="media-left">
-							<a href="{$_M[url][adminurl]}anyid=65&n=appstore&c=appstore&a=doservice">
-								<img class="media-object" src="http://app.metinfo.cn/file/serviceicon/tempservice.png" width="80">
-							</a>
-						</div>
-						<div class="media-body">
-							<span class="label label-info">为你定制</span>
-							<a href="{$_M[url][adminurl]}anyid=65&n=appstore&c=appstore&a=doservice">
-								<h4 class="media-heading">模板制作/修改/二次开发<span class="text-danger"></span></h4>
-								<p>模板制作与修改/二次开发 ，精选优秀服务商为您提供个性化服务。</p>
-							</a>
-						</div>
-					</div>
-				</div>
-				-->
+				</div>				
 			</div>
 		</div>
 	</section>

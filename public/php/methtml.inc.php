@@ -50,6 +50,7 @@ if($appscriptcss)$methtml_head.="{$appscriptcss}\n";
 if($_M['html_plugin']['head_script'])$methtml_head.="{$_M['html_plugin']['head_script']}";
 //结束
 $methtml_head.="<script src=\"".$navurl."public/js/public.js\" type=\"text/javascript\" language=\"javascript\"></script>\n";
+$methtml_head.="<script src=\"".$navurl."public/js/video.js\" type=\"text/javascript\" language=\"javascript\"></script>\n";
 $query = "SELECT * FROM met_config where lang='$lang' and name='met_headstat'";
 	$result = $db->query($query);
 	while($list = $db->fetch_array($result)) {
@@ -896,17 +897,43 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 			$sqltype="and img_ok=1";
 		break;
 	}
+
 	if($mark){
 		if($marktype){
 			$listnowid=$mark;
+       
 			$listnowclass="class{$class_list[$mark]['classtype']}";
 			if($class_list[$mark]['releclass'])$listnowclass="class1";
+   
+           
+              //从这里判断产品多栏目sql语句
+			  //如果是三级栏目
+			   if($listnowclass=="class3"){
+			   	 $searchsql="or ( classother REGEXP '/|-[0-9]-[0-9]-{$listnowid}-|/' and lang='{$lang}')";
+			   }
+
+
+			   //如果是二级栏目
+			   if($listnowclass=="class2"){
+                 $searchsql="or ( classother REGEXP '/|-[0-9]-{$listnowid}-0-|/' and lang='{$lang}')";
+			   }
+     
+
+
+
+
+
+
+
+
+
 			$modulex=metmodname($class_list[$mark]['module']);
 			$sqlorder=$order?$sqlorder:list_order($class_list[$mark]['list_order']);
 		}
 		else{
 			$listnowid=$class_index[$mark]['id'];
 			$listnowclass="{$class_index[$mark]['classtype']}";
+
 			$modulex=metmodname($class_index[$mark]['module']);
 			$sqlorder=$order?$sqlorder:list_order($class_index[$mark]['list_order']);
 		}
@@ -916,6 +943,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 		}else{
 			
 		}
+
 		if($listnowclass=='class1'){
 			$class1sql=" $listnowclass='$listnowid' ";
 			foreach($module_list2[$class_list[$listnowid]['module']] as $key=>$val){
@@ -928,6 +956,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 			}
 			$sqlclounm=' and '.$class1sql;
 		}else{
+
 			$sqlclounm="and $listnowclass='$listnowid'";
 		}
 		if(!$modulex){
@@ -943,6 +972,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 			$modulenunm=2;
 			break;
 		case 'product':
+		  
 			$modulenunm=3;
 			break;
 		case 'download':
@@ -1006,9 +1036,12 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 				$rand_query = $sqlorder." limit $rand, $listmx";
 			}
 		}
-		$query = "SELECT $select FROM $table where lang='$lang' {$mobilesql} $sqlclounm $access_sql $sqltype and (recycle='0' or recycle='-1') and addtime<='{$m_now_date}' $displaytype_sql $rand_query";
+		$query = "SELECT $select FROM $table where lang='$lang' {$mobilesql} $sqlclounm $access_sql $sqltype and (recycle='0' or recycle='-1') {$searchsql} and addtime<='{$m_now_date}' $displaytype_sql $rand_query";
 	}
+   
 	$result = $db->query($query);
+	
+
 	while($list= $db->fetch_array($result)){
 		if($modulenunm==6){$list['updatetime']=$list['addtime'];$list['title']=$list['position'];}
 		$list['updatetime_original']=$list['updatetime'];
@@ -1069,7 +1102,7 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 					$i++;
 					if($list1['paraid']==$val['id']){
 						if(($metpara[$list1['paraid']]['class1']==0) or ($metpara[$list1['paraid']]['class1']==$list['class1'] and $metpara[$list1['paraid']]['class2']==0 and $metpara[$list1['paraid']]['class3']==0) or ($metpara[$list1['paraid']]['class1']==$list['class1'] and $metpara[$list1['paraid']]['class2']==$list['class2'] and $metpara[$list1['paraid']]['class3']==0) or ($metpara[$list1['paraid']]['class1']==$list['class1'] and $metpara[$list1['paraid']]['class2']==$list['class2'] and $metpara[$list1['paraid']]['class3']==$list['class3'])){
-							$ik=$i;
+							$ik=$list1['paraid'];
 						}
 					}
 				}
@@ -1116,6 +1149,8 @@ function methtml_getarray($mark,$type,$order,$module,$listmx=-1,$para=0,$categor
 		$list['img_y']=met_imgxy(2,$module);
 		$relist[]=$list;
 	}
+
+
 	return $relist;
 }
 

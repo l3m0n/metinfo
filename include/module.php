@@ -48,7 +48,7 @@ if(isset($metid) && ($met_pseudo || $met_htmlurl || $pseudo_jump)){
 		else{
 			if($anyone['classtype']==1)$class1= $anyone['id'];
 			if($anyone['classtype']==2)$class2= $anyone['id'];
-			if($anyone['classtype']==3)$class3= $anyone['id'];
+		    if($anyone['classtype']==3)$class3= $anyone['id'];
 			$anyone2 = $db->get_one("SELECT * FROM $met_column WHERE id='$anyone[bigclass]' and lang ='$lang'");
 			if($anyone2['releclass']){
 				$class1=$anyone2['id'];

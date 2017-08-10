@@ -64,7 +64,7 @@ class valid {
 		$session->set("phonetel",$tel);
 		
 		$sms = load::sys_class('sms', 'new');
-		$ret = $sms->sendsms($tel, "验证码为 {$code} ，请及时输入验证。({$_M['config']['met_webname']})");
+		$ret = $sms->sendsms($tel, "验证码为 {$code} ，请及时输入验证。");
 		return $ret;
 		
 	}

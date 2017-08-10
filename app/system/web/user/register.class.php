@@ -14,7 +14,7 @@ class register extends userweb {
 	public function __construct() {
 		global $_M;
 		parent::__construct();
-		isset($_SESSION) ? "" : session_start();
+		isset($_SESSION) ? "" : load::sys_class('session', 'new');
 		if(!$_M['config']['met_member_register']){
 			okinfo($_M['url']['login'], $_M['word']['regclose']);
 		}

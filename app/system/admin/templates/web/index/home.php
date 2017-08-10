@@ -3,6 +3,55 @@
 # Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
 
 defined('IN_MET') or exit('No permission');
+$privilege = background_privilege();
+$navigation=$privilege['navigation'];
+$arrlanguage=explode('|', $navigation);
+  if(in_array('metinfo',$arrlanguage)||in_array('1201',$arrlanguage)){
+	$langprivelage=1;
+  }else{
+    $langprivelage=0;
+  }
+  if(in_array('metinfo',$arrlanguage)||in_array('1007',$arrlanguage)){
+	$inforprivelage=1;
+  }else{
+   $inforprivelage=0;
+  }
+if(in_array('metinfo',$arrlanguage)||in_array('1301',$arrlanguage)){
+	$fubu=1;
+  }else{
+   $fubu=0;
+  }
+
+
+echo <<<EOT
+-->
+   <script>
+      function valide(){
+	      if({$langprivelage}){
+            $('#column').attr('href','{$_M[url][site_admin]}column/index.php?anyid=25&lang={$_M[lang]}');
+	      }else{
+	        alert("您没有此操作权限请联系管理员");
+	      }
+      }
+    
+    function information(){
+	    if({$inforprivelage}){
+            $('#information').attr('href','{$_M[url][site_admin]}index.php?n=webset&c=webset&a=doindex&anyid=57&lang={$_M[lang]}');
+	      }else{
+	        alert("您没有此操作权限请联系管理员");
+	      }
+    }
+
+     function fubu(){
+	    if({$fubu}){
+            $('#fubu').attr('href','{$_M[url][site_admin]}index.php?n=content&c=content&a=doadd&anyid=68&lang={$_M[lang]}');
+	      }else{
+	        alert("您没有此操作权限请联系管理员");
+	      }
+    }
+   </script>
+<!--
+EOT;
 
 require $this->template('ui/head');
 echo <<<EOT
@@ -31,14 +80,14 @@ echo <<<EOT
 		</h3><div class="container-fluid">
 		<ul>
 			<li>
-				<a href="{$_M[url][site_admin]}index.php?n=webset&c=webset&a=doindex&anyid=57&lang={$_M[lang]}">
+				<a href="" onclick='information()' id="information">
 					<i class="fa fa-newspaper-o"></i>
 					{$_M['word']['upfiletips7']} 
 				</a>
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				<a href="{$_M[url][site_admin]}column/index.php?anyid=25&lang={$_M[lang]}">
+				<a href="" onclick='valide()' id="column">
 					<i class="fa fa-sitemap"></i>
 					{$_M['word']['configuration_section']}
 				</a>
@@ -52,7 +101,7 @@ echo <<<EOT
 				<i class="fa fa-angle-right"></i>
 			</li>
 			<li>
-				<a href="{$_M[url][site_admin]}index.php?n=content&c=content&a=doadd&anyid=68&lang={$_M[lang]}">
+				<a href="" onclick='fubu()' id="fubu">
 					<i class="fa fa-plus"></i>
 					{$_M['word']['publish_content']}
 				</a>
@@ -206,14 +255,14 @@ echo <<<EOT
 				<div class="col-md-4 col-sm-6 col-xs-12 index_stat_chart">
 					<div class="media">
 						<div class="media-left">
-							<a href="{$_M[url][adminurl]}anyid=65&n=appstore&c=appstore&a=doservice">
-								<img class="media-object" src="http://app.metinfo.cn/file/serviceicon/tempservice.png" width="80">
+							<a href="#">
+								<img class="media-object" src="" width="80">
 							</a>
 						</div>
 						<div class="media-body">
-							<a href="{$_M[url][adminurl]}anyid=65&n=appstore&c=appstore&a=doservice">
-								<h4 class="media-heading">模板制作/修改/二次开发<span class="text-danger"></span></h4>
-								<p>模板制作与修改/二次开发 ，精选优秀服务商为您提供个性化服务。</p>
+							<a href="#">
+								<h4 class="media-heading"><span class="text-danger"></span></h4>
+								<p></p>
 							</a>
 						</div>
 					</div>

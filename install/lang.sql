@@ -636,9 +636,9 @@ INSERT INTO met_language VALUES('25638','smstips95','错误原因：','1','272',
 INSERT INTO met_language VALUES('25637','smstips94','当前短信发送价格和服务器设定价格不一致，点击<a href=''''>此处</a>刷新页面，重新获取发送价格','1','271','6','0','cn');
 INSERT INTO met_language VALUES('25635','smstips92','联系','1','269','6','0','cn');
 INSERT INTO met_language VALUES('25636','smstips93','开通','1','270','6','0','cn');
-INSERT INTO met_language VALUES('25634','smstips91','访问<a href=\"http://www.metinfo.cn/news/shownews982.htm\" target=\"_blank\">审核说明</a>页面进行审核。','1','268','6','0','cn');
+INSERT INTO met_language VALUES('25634','smstips91','及时查收余额','1','268','6','0','cn');
 INSERT INTO met_language VALUES('25632','smstips84','立即兑换','1','266','6','0','cn');
-INSERT INTO met_language VALUES('25633','smstips90','批量发送必须通过审核后方可发送，请注册充值后，','1','267','6','0','cn');
+INSERT INTO met_language VALUES('25633','smstips90','请注册充值后，','1','267','6','0','cn');
 INSERT INTO met_language VALUES('25631','smstips83','优惠劵使用说明','1','265','6','0','cn');
 INSERT INTO met_language VALUES('25630','smstips82','使用成功','1','264','6','0','cn');
 INSERT INTO met_language VALUES('25629','smstips81','超过使用时间','1','263','6','0','cn');
@@ -2055,10 +2055,10 @@ INSERT INTO met_language VALUES('27648','waptips2','Settings Wap content page sh
 INSERT INTO met_language VALUES('27647','waptips1','Wap settings','1','273','6','0','en');
 INSERT INTO met_language VALUES('27646','smstips95','error Cause :','1','272','6','0','en');
 INSERT INTO met_language VALUES('27645','smstips94','current SMS server set prices and price inconsistencies , click <a href=''''> here </ a> to refresh the page , sending prices to reacquire','1','271','6','0','en');
-INSERT INTO met_language VALUES('27642','smstips91','Visit <a href = \"http://www.metinfo.cn/news/shownews982.htm\" target=\"_blank\"> audit Description </ a> page for review.','1','268','6','0','en');
+INSERT INTO met_language VALUES('27642','smstips91','after deposit','1','268','6','0','en');
 INSERT INTO met_language VALUES('27644','smstips93','open','1','270','6','0','en');
 INSERT INTO met_language VALUES('27643','smstips92','Contact','1','269','6','0','en');
-INSERT INTO met_language VALUES('27641','smstips90','Batch send audit must be sent through the post , registered post , please recharge','1','267','6','0','en');
+INSERT INTO met_language VALUES('27641','smstips90','Please check the balance','1','267','6','0','en');
 INSERT INTO met_language VALUES('27640','smstips84','Redeem','1','266','6','0','en');
 INSERT INTO met_language VALUES('27639','smstips83','coupon use','1','265','6','0','en');
 INSERT INTO met_language VALUES('27637','smstips81','over time','1','263','6','0','en');
@@ -4504,7 +4504,7 @@ INSERT INTO met_language VALUES('35751','sys_authorization2','了解商业授权
 INSERT INTO met_language VALUES('35760','detection','检测中','1','0','1','0','cn');
 INSERT INTO met_language VALUES('35761','recommended_tems','推荐应用','1','0','1','0','cn');
 INSERT INTO met_language VALUES('35762','more_tems','更多模板','1','0','1','0','cn');
-INSERT INTO met_language VALUES('35763','usernametips','如果有官网或交流论坛帐号，请注册成一样，因为我们即将同步三个平台的帐号。','1','0','1','0','cn');
+INSERT INTO met_language VALUES('35763','usernametips','如果有官网或交流论坛帐号，请注册成一样，因为我们即将同步三个平台的帐号','1','0','1','0','cn');
 INSERT INTO met_language VALUES('35776','authorization_level','授权等级','1','0','1','0','cn');
 INSERT INTO met_language VALUES('35777','technical_support','获取技术支持','1','0','1','0','cn');
 INSERT INTO met_language VALUES('35778','entry_authorization','重新录入授权','1','0','1','0','cn');
@@ -6331,8 +6331,8 @@ INSERT INTO met_language VALUES('29674','smstips81','超過使用時間','1','26
 INSERT INTO met_language VALUES('29675','smstips82','使用成功','1','264','6','0','tc');
 INSERT INTO met_language VALUES('29676','smstips83','優惠劵使用說明','1','265','6','0','tc');
 INSERT INTO met_language VALUES('29677','smstips84','立即兌換','1','266','6','0','tc');
-INSERT INTO met_language VALUES('29678','smstips90','批量發送必須通過審核後方可發送，請注冊充值後，','1','267','6','0','tc');
-INSERT INTO met_language VALUES('29679','smstips91','訪問<a href="http://www.metinfo.cn/news/shownews982.htm" target="_blank">審核說明</a>頁麵進行審核。','1','268','6','0','tc');
+INSERT INTO met_language VALUES('29678','smstips90','請注冊充值後，','1','267','6','0','tc');
+INSERT INTO met_language VALUES('29679','smstips91','及时查收余額。','1','268','6','0','tc');
 INSERT INTO met_language VALUES('29680','smstips92','聯繫','1','269','6','0','tc');
 INSERT INTO met_language VALUES('29681','smstips93','開通','1','270','6','0','tc');
 INSERT INTO met_language VALUES('29682','smstips94','當前短信發送價格和服務器設定價格不一致，點擊<a href="">此處</a>刷新頁麵，重新獲取發送價格','1','271','6','0','tc');

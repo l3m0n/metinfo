@@ -186,8 +186,12 @@ sendsms($met_nurse_job_tel,$message,4);
 }
 }
 /**/
+
+$backurls=str_replace('save.php', '', $_SERVER["PHP_SELF"]);
+
+
 $backurl=$metinfo_member_name==""?'../index.php?lang='.$lang:'../member/'.$member_index_url;					  
-okinfo($backurl,$lang_js21);
+okinfo($backurls,$lang_js21);
 }
 
 # This program is an open source system, commercial use, please consciously to purchase commercial license.

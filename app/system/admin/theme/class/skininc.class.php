@@ -107,7 +107,7 @@ class skininc {
 		global $_M;
 		$convlue = $val[name];
 		$convlue = $val['style'] ==0 ? $val['value'] : $_M['config'][$val['value']];
-		$convlue = $val['value'];
+		$convlue = $val['value']=="" ? $val['defaultvalue']:$val['value'];
 		$val[inputhtm] ="
 			<div class=\"fbox\">
 				<input type=\"text\" name=\"{$val[name]}_metinfo\" value=\"{$convlue}\" />
@@ -124,7 +124,8 @@ class skininc {
 		$val[ftype]="ftype_textarea";
 		$convlue = $val[name];
 		$convlue = $val['style'] ==0 ? $val['value'] : $_M['config'][$val['value']];
-		$convlue = $val['value'];
+		$convlue = $val['value']=="" ? $val['defaultvalue']:$val['value'];
+
 		$val[inputhtm] ="
 			<div class=\"fbox\">
 				<textarea name=\"{$val[name]}_metinfo\">{$convlue}</textarea>
@@ -141,6 +142,7 @@ class skininc {
 		$val[inputhtm]='<div class="fbox">';
 		foreach($vlist as $key=>$val2){
 			$vz=explode('$T$',$val2);
+			$val['value']=$val['value']=="" ? $val['defaultvalue']:$val['value'];
 			if($vz[0]){
 			$val[inputhtm].="<label>";
 			$select=$val['value']==$vz[1]?'checked':'';
@@ -171,6 +173,7 @@ class skininc {
 			$vlist=explode('$M$',$val['selectd']);
 			foreach($vlist as $key=>$val2){
 				$vz=explode('$T$',$val2);
+				$val['value']=$val['value']=="" ? $val['defaultvalue']:$val['value'];
 				$select=$val['value']==$vz[1]?'selected':'';
 				$val['inputhtm'].="<option value='".$vz[1]."' {$select}>".$vz[0]."</option>";
 			}
@@ -263,7 +266,7 @@ class skininc {
 		global $_M;
 		$convlue = $val[name];
 		$convlue = $val['style'] ==0 ? $val['value'] : $_M['config'][$val['value']];
-		$convlue = $val['value'];
+		$convlue = $val['value']=="" ? $val['defaultvalue']:$val['value'];
 		$val[ftype]="ftype_upload";
 		$val[inputhtm]="
 			<div class=\"fbox\">
@@ -289,7 +292,7 @@ class skininc {
 		$val[ftype]="ftype_ckeditor_theme";
 		$convlue = $val[name];
 		$convlue = $val['style'] ==0 ? $val['value'] : $_M['config'][$val['value']];
-		$convlue = $val['value'];
+		$convlue = $val['value']=="" ? $val['defaultvalue']:$val['value'];
 		$val[inputhtm] ="
 			<div class=\"fbox\"> 
 				<textarea name=\"{$val[name]}_metinfo\" data-ckeditor-type=\"2\" data-ckeditor-y='300'>{$convlue}</textarea>

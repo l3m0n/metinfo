@@ -37,7 +37,7 @@ if($met_online_type<>3){
 			$metinfo.='<a href="http://wpa.qq.com/msgrd?v=3&uin='.$val[qq].'&site=qq&menu=yes" target="_blank"><img alt="QQ'.$val[name].'" border="0" src="http://wpa.qq.com/pa?p=2:'.$val[qq].':'.$met_qq_type.'" title="QQ'.$val[name].'" /></a>';
 		}
 		if($val[msn]!="")$metinfo.='<span class="met_msn"><a href="msnim:chat?contact='.$val[msn].'"><img border="0" alt="MSN'.$val[name].'" src="'.$met_url.'images/msn/msn_'.$met_msn_type.'.gif"/></a></span>';
-		if($val[taobao]!="")$metinfo.='<span class="met_taobao"><a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid='.$val[taobao].'&siteid=cntaobao&status='.$met_taobao_type.'&charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid='.$val[taobao].'&site=cntaobao&s='.$met_taobao_type.'&charset=utf-8" alt="'.$val[name].'" /></a></span>';
+		if($val[taobao]!="")$metinfo.='<span class="met_taobao"><a target="_blank" href="http://www.taobao.com/webww/ww.php?ver=3&touid='.urlencode($val[taobao]).'&siteid=cntaobao&status='.$met_taobao_type.'&charset=utf-8"><img border="0" src="http://amos.alicdn.com/online.aw?v=2&uid='.$val[taobao].'&site=cntaobao&s='.$met_taobao_type.'&charset=utf-8" alt="'.$val[name].'" /></a></span>';
 		if($val[alibaba]!=""){
 			$span="";
 			if($met_alibaba_type==11){

@@ -278,7 +278,12 @@ define(function(require, exports, module) {
 						var dom = $(this).parents('.picture-list').prev();
 						imgvalue(dom);
 					}
-				}); 
+
+					
+				}).find('.sort a').click(function(e) {
+					if(navigator.userAgent.indexOf("Firefox") > -1) e.preventDefault();
+				});
+
 			});
 			
 			//删除按钮

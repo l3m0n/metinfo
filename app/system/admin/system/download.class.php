@@ -14,7 +14,6 @@ class download extends admin {
 	protected $info;
 	protected $savedir;
 	protected $getdir;
-	
 	function __construct() {
 		global $_M;
 		parent::__construct();
@@ -65,6 +64,7 @@ class download extends admin {
 	}
 	public function checkfilepower($file) {
 		global $_M;
+
 		if(makefile($file, false)){	
 			return getfilepower($file);
 		}else{
@@ -87,6 +87,7 @@ class download extends admin {
 				$str.="{$val}<br />";
 			}
 		}
+
 		if($str){
 			return $_M['word']['following_documents'].'<!>'.$_M['word']['following_documents'].$str;
 		}else{
@@ -100,23 +101,25 @@ class download extends admin {
 		deldir(PATH_WEB.$_M['config']['met_adminfile'].'/update/test/');
 		if ($this->checkfilepower($updatefile)) {
 			/*请求并验证下载权限*/
-			$this->curl->set('file', 'index.php?n=platform&c=system&a=docheckpower');
+			
 			$app['ver'] = $_M['config']['metcms_v'];
-			if($this->info['type'] == 'app'){
-				$query = "SELECT * FROM {$_M['table']['applist']} ";
-				$app = DB::get_one($query);
-			}
-
-			if($this->info['type'] == 'tem'){
-				$query = "SELECT * FROM {$_M['table']['skin_table']} ";
-				$app = DB::get_one($query);
-			}
 			$query = "SELECT * FROM {$_M['table']['otherinfo']} where id=1";
 			$th = DB::get_one($query);
 			$authkey = $th['authpass'];
 			$authcode= $th['authcode'];
+
+			if($this->info['type'] == 'app'){
+				$query = "SELECT * FROM {$_M['table']['applist']} ";
+				$app = DB::get_one($query);
+			}
+			if($this->info['type'] == 'tem'){
+				$query = "SELECT * FROM {$_M['table']['skin_table']} ";
+				$app = DB::get_one($query);
+			}
+			$this->curl->set('file', 'index.php?n=platform&c=system&a=docheckpower');
 			$post = array('type'=>$this->info['type'], 'no'=>$this->info['no'], 'ver'=>$app['ver'], 'cmsver'=>$_M['config']['metcms_v'], 'user_key'=>$_M['config']['met_secret_key'], 'authkey'=>$authkey, 'authcode'=>$authcode);
 			$getdata = $this->curl->curl_post($post);
+
 			list($suc, $this->info['checknum']) = explode('|', $getdata);
 			//echo $this->curl->curlerror;
 			if ($suc == 'suc') {
@@ -126,6 +129,13 @@ class download extends admin {
 				//补充代码----------检测dllist.php下载权限
 				$re = $dlfile->dlfile('dllist.php', $this->savedir.'dllist.php', $this->info['checknum']);
 				if ($re == 1) {
+					include $this->savedir.'dllist.php';
+					if($ex) {
+						$depend_no  = $this->check_need($ex);
+						$depend = json_encode($depend_no);
+						$dll = $dlfile->dlfile('dllist.php', $this->savedir.'dllist.php', $this->info['checknum'],$depend);
+					}
+
 					//补充代码----------检测dllist.php文件列表中文件权限
 					$nopower = $this->checkdllistpower();
 					if($nopower){
@@ -152,13 +162,26 @@ class download extends admin {
 		$dlfile = $this->dlfile();
 		require_once $this->savedir.'dllist.php';
 		$num = $this->info['step'];
+		
 		if ($dllist[$num]) {
-			$re = $dlfile->dlfile($dllist[$num], $this->savedir.$dllist[$num], $this->info['checknum']);
+
+			$save_path = $this->savedir.$dllist[$num];
+
+			if(strpos($dllist[$num], '###') !== false ){
+				$save_path = $this->savedir.(str_replace('###yilai/', '', $dllist[$num]));
+			}
+
+			if($dllist[$num] != 'dllist.php') {
+				$re = $dlfile->dlfile($dllist[$num], $save_path, $this->info['checknum']);
+			}else{
+				$re = 1;
+			}
+			
 			if ($re == 1) {
 				$html = "{$_M['word']['download']}...".floor((($num)/count($dllist))*100)."% ({$_M['word']['download_prompt']})";
 				return $this->suc_data('dl', $this->info['step']+1, $html);
 			} else {
-				return $this->fail_data("{$_M['word']['download_interrupt']},{$_M['word']['possible_reasons']}:".$re);
+				return $this->fail_data("{$_M['word']['download_interrupt']},{$_M['word']['possible_reasons']}:".$re.$this->savedir.$dllist[$num]);
 			}
 		} else {
 			$html = $_M['word']['installation'];
@@ -168,7 +191,6 @@ class download extends admin {
 	
 	public function install() {
 		global $_M;
-
 		require_once $this->savedir.'install.class.php';
 		$install = new install();
 		@$install->step = $this->info['step'];
@@ -181,24 +203,30 @@ class download extends admin {
 		//安装文件
 		if ($copydir != 'notcopy') {
 			$copyfile = $this->savedir.$copydir;
-			$resource = opendir($copyfile);
-			while (($file = readdir($resource))!== false) {
-				if($file == '.' || $file == '..'){
-					continue;
-				}
-				if (is_dir($copyfile.$file)) {
-					if ($file == 'admin') {
-						copydir($copyfile."admin", PATH_WEB.$_M['config']['met_adminfile']);
-					}else{
-						copydir($copyfile.$file, PATH_WEB.$file);
+			$this->copy_file($copyfile);
+		}
+
+		require_once $this->savedir.'dllist.php';
+		
+		if($ex) {
+			if($depend_no = $this->check_need($ex)){
+				foreach ($depend_no as $key => $v) {
+					$dir = $this->savedir.$v.'/';
+
+					if(is_dir($dir)){
+						$this->copy_file($dir);
 					}
-				} else {
-					copyfile($copyfile.$file, PATH_WEB.$file);
+					$class = "depend{$v}";
+					include_once $dir."{$class}.class.php";
+					$class = new $class();
+					$class->dosql();
 				}
 			}
 		}
+
 		//安装数据
 		$re = $install->dosql();
+		
 		if ($re == 'complete' || !$re) {
 			return $this->suc_data('complete', 0, $_M['word']['installation_complete']);
 		} else if ($re == 'next') {
@@ -334,6 +362,41 @@ class download extends admin {
 				DB::query($query);
 			}
 		}
+	}
+
+
+	protected function copy_file($dir) {
+		global $_M;
+		$resource = opendir($dir);
+		while (($file = readdir($resource))!== false) {
+			if($file == '.' || $file == '..'){
+				continue;
+			}
+			if (is_dir($dir.$file)) {
+				if ($file == 'admin') {
+					copydir($dir."admin", PATH_WEB.$_M['config']['met_adminfile']);
+				}else{
+					copydir($dir.$file, PATH_WEB.$file);
+				}
+			} else {
+				copyfile($dir.$file, PATH_WEB.$file);
+
+			}
+		}
+	}
+
+	protected function check_need($ex) {
+		global $_M;
+		$need = array();
+		foreach ($ex as $key => $v) {
+			$query = "SELECT * FROM {$_M['table']['applist']} WHERE depend like '{$v}'";
+			$res = DB::get_one($query);
+			if(!$res)
+			{
+				$need[] = $v;
+			}
+		}
+		return $need;
 	}
 
 }

@@ -208,10 +208,14 @@ class skinc{
 		}
 		$nowidnew = array();
 		$have['indexbannerlist'] = str_replace("\\","",$have['indexbannerlist']);
+		
 		$bannerlist = json_decode($have['indexbannerlist'],true);
+         
 		foreach($bannerlist as $key=>$val){
 			if($val['img_path']!=''){
 				if(!strstr($val['img_path'],"../"))$val['img_path'] = '../'.$val['img_path'];
+		
+
 				if($val['id']){
 					$query = "update {$_M[table][flash]} SET 
 					img_title = '{$val['img_title']}',
@@ -220,6 +224,8 @@ class skinc{
 					no_order  = '{$key}'
 					WHERE id  = '{$val['id']}'";
 					$nowidnew[] = $val['id'];
+
+						
 				}else{
 					$query = "INSERT INTO {$_M[table][flash]} SET 
 					img_title = '{$val['img_title']}',
@@ -230,16 +236,37 @@ class skinc{
 					wap_ok    = '{$wap_ok}',
 					lang      = '{$this->lang}'";
 				}
+				
 				DB::query($query);
 			}
+
 		}
+
 		$nowid = array_diff($nowidold,$nowidnew);
+
 		if($nowid){
 			foreach($nowid as $key=>$val){
-				$query = "delete from {$_M[table][flash]} where id='{$val}'";
-				DB::query($query);
+
+				 $query="select module from {$_M[table][flash]} where id='{$val}'";
+
+				   $result=DB::query($query);
+
+				  while ($metinfo=mysql_fetch_array($result)){
+
+				       if($metinfo['module']!='metinfo'){
+
+				 	    $query = "delete from {$_M[table][flash]} where id='{$val}'";
+
+			              DB::query($query);
+				
+				       }
+				  }
+				
+				
+				
 			}
 		}
+		
 	}
 	/*模板验证*/
 	public function check($no) {

@@ -67,7 +67,7 @@ class appstore extends admin {
 			$query = "SELECT * FROM {$_M['table']['skin_table']} WHERE skin_file ='{$appdetail['no']}'";
 			$app = DB::get_one($query);	
 			if($app){
-				$app['ver'] = '1.0';
+				//$app['ver'] = '1.0';
 				$app['url'] = "<a target=\"_blank\" href=\"{$_M['url']['adminurl']}n=theme&c=theme&a=doindex&mobile={$app['devices']}&anyid=70&lang={$_M['lang']}\">{$_M['word']['configuratio_template']}</a>";
 			}
 			$appdetail['no'] = $_M['form']['appid'];

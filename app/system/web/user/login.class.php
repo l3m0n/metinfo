@@ -70,7 +70,11 @@ class login extends userweb {
 			if(isset($_COOKIE['referer']) && !strstr($_COOKIE['referer'], 'member/login')  &&!strstr($_COOKIE['referer'], 'getpassword') )
 			{	
 				$referer = $_COOKIE['referer'];
+				  if(strstr($referer,'/member/register_include.php')){
+                           	okinfo($_M['url']['user_home']);
+				  }
 				// 删除cookie保存的来源地址
+				
 				setcookie("referer");
 				okinfo($referer);
 
@@ -105,7 +109,7 @@ class login extends userweb {
 		$type = $_M['form']['amp;type'] ? $_M['form']['amp;type'] : $_M['form']['type'];
 		$other = $this->other($type);
 		$user = $other->get_user($_M['form']['code']);
-		
+		 
 		if(!$other->state_ok($_M['form']['state'])){
 			okinfo($_M['url']['login'], $_M['word']['membererror2']);
 		}

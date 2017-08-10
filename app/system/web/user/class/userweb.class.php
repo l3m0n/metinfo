@@ -36,7 +36,7 @@ class userweb extends web {
 		foreach($navigation as $key=>$val){
 			if($val[columnid]){
 				//$column = $class_list[$val[columnid]];
-				$query = "SELECT * FROM {$_M['table']['column']} WHERE id = '{$val[columnid]}'";
+				$query = "SELECT * FROM {$_M['table']['column']} WHERE id = '{$val[columnid]} ' and lang='{$_M['lang']}'";
 				$column = DB::get_one($query);
 				$val['foldername'] = $val['foldername'] ? $val['foldername'] : $column['foldername'];
 				$val['filename'] = $val['filename'] ? $val['filename'] : 'index.php';

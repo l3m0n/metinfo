@@ -81,6 +81,7 @@ class keylogin extends web {//一键登录功能
 		$met_cookie['metinfo_admin_type']=$admin['usertype'];
 		$met_cookie['metinfo_admin_pop']=$admin['admin_type'];
 		$met_cookie['metinfo_admin_time']=time();
+		$met_cookie['metinfo_admin_lang']=$admin['langok'];
 		$m_now_date = date('Y-m-d H:i:s');
 		$m_user_ip = get_userip();
 		$json = json_encode($met_cookie);
@@ -113,7 +114,7 @@ class keylogin extends web {//一键登录功能
 			$curl->curl_post();
 			/*重新生成robots.txt*/
 			$sitemaptype = $_M['config']['met_sitemap_xml']?'xml':($_M['config']['met_sitemap_txt']?'txt':0);
-			sitemap_robots($sitemaptype);
+			//sitemap_robots($sitemaptype);
 		}
 		deldir(PATH_WEB.'cache',1);
 	}

@@ -2,9 +2,9 @@ define(function(require, exports, module) {
 
 	var $ = jQuery = require('jquery');
 
-	require('epl/editor/ueditor/ueditor.config');
-	require('epl/editor/ueditor/ueditor.all.min');
 	
+	require('edturl/ueditor.config');
+	require('edturl/ueditor.all.min');
 	function editor(d,name,type,x,y) {
 		var p=d.parents(".ftype_ckeditor");
 		/*加载状态*/
@@ -35,3 +35,5 @@ define(function(require, exports, module) {
 	}
 	
 });
+
+

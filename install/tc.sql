@@ -221,7 +221,7 @@ INSERT INTO met_online VALUES('9','咨詢銷售','1','348468810','','metinfo',''
 INSERT INTO met_online VALUES('10','咨詢銷售','2','1498488199','metinfo@metinfo.tc','','','','tc');
 INSERT INTO met_online VALUES('11','空間域名','3','2545740365','','metinfo','','','tc');
 INSERT INTO met_online VALUES('12','合作加盟','4','909059761','metinfo@metinfo.tc','','','','tc');
-INSERT INTO met_otherinfo VALUES('5','','','','','','','','','','<div>請在<strong>後臺-內容管理-其他內容</strong>中修改此段文字</div><div>某某有限公司</div><div>電 &nbsp;話：0000-888888</div><div>郵 &nbsp;編：000000</div><div>Email：admin@admin.tc</div><div>網 &nbsp;址：www.xxxxx.tc</div>','','','','','','','','','tc');
+INSERT INTO met_otherinfo VALUES('5','','','','','','','','','','<div>請在<strong>後臺-外觀-電腦-設置-首頁</strong>中修改此段文字</div><div>某某有限公司</div><div>電 &nbsp;話：0000-888888</div><div>郵 &nbsp;編：000000</div><div>Email：admin@admin.tc</div><div>網 &nbsp;址：www.xxxxx.tc</div>','','','','','','','','','tc');
 INSERT INTO met_parameter VALUES('125','型號','','','1','1','0','1','0','0','0','3','tc','0');
 INSERT INTO met_parameter VALUES('126','品牌','','','2','1','0','1','0','0','0','3','tc','0');
 INSERT INTO met_parameter VALUES('127','價格','','','3','1','1','1','0','0','0','3','tc','0');

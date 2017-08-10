@@ -157,6 +157,7 @@ function footer(){
 	global $output;
 	$output = str_replace(array('<!--<!---->','<!---->','<!--fck-->','<!--fck','fck-->','',"\r",substr($admin_url,0,-1)),'',ob_get_contents());
     ob_end_clean();
+    load::plugin('dofooter_replace',0,array('data'=>$output));
 	echo $output;
 	DB::close();
 	exit;
@@ -200,7 +201,7 @@ function cache_str(){
 
 function cache_column(){
 	global $_M;//mobile
-	$query="SELECT * FROM {$_M['table']['column']} WHERE lang='{$_M['lang']}' ORDER BY classtype desc,no_order";
+	$query="SELECT * FROM {$_M['table']['column']} WHERE lang='{$_M['lang']}' AND display =0 ORDER BY classtype desc,no_order";
 	$result= DB::query($query);
 	while($list = DB::fetch_array($result)){
 		$cache_column[$list['id']]=$list;

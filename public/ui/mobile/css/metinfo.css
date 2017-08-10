@@ -11,7 +11,8 @@ a{ color:#8d8d8d; text-decoration:none }
 .editor ul,.editor ol{ padding-left:28px;}
 .editor ul li{ list-style-type:disc; margin-bottom:3px; }
 .editor ol li{ list-style-type:decimal; margin-bottom:3px; }
-.editor img{ max-height:100%;}
+.editor img{ max-height:100%;
+    max-width: 100% !important;}
 .editor .metvideobox{ text-align:center; margin:10px auto; }
 .editor .video-js{ max-width:100%; }
 /*分页*/

@@ -340,6 +340,7 @@ if($class_info[name]=="")$class_info=array('name'=>$lang_search,'url'=>'search.p
      $show[keywords]=$class_info[keywords]?$class_info[keywords]:$met_keywords;
 	 $met_title=$met_title?$class_info['name'].'-'.$met_title:$class_info['name'];
 	 if($class_info['ctitle']!='')$met_title=$class_info['ctitle'];
+	  if($class_info['keywords']!='')$met_title.='-'.$class_info['keywords'];
 	 if($page>1)$met_title.='-'.$lang_Pagenum1.$page.$lang_Pagenum2;
 require_once '../public/php/methtml.inc.php';
 function methtml_searchlist($content=1,$time=1,$detail=1,$img=0){

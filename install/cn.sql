@@ -205,7 +205,7 @@ INSERT INTO met_online VALUES('1','咨询销售','1','348468810','','metinfo',''
 INSERT INTO met_online VALUES('2','咨询销售','2','1498488199','metinfo@metinfo.cn','','','','cn');
 INSERT INTO met_online VALUES('3','空间域名','3','2545740365','','metinfo','','','cn');
 INSERT INTO met_online VALUES('4','合作加盟','4','909059761','metinfo@metinfo.cn','','','','cn');
-INSERT INTO met_otherinfo VALUES('3','','','','','','','','','','<div>请在<strong>后台-内容管理-其他内容</strong>中修改此段文字</div><div>某某有限公司</div><div>电 &nbsp;话：0000-888888</div><div>邮 &nbsp;编：000000</div><div>Email：admin@admin.cn</div><div>网 &nbsp;址：www.xxxxx.cn</div>','','','','','','','','','cn');
+INSERT INTO met_otherinfo VALUES('3','','','','','','','','','','<div>请在<strong>后台-外观-电脑-设置-首页</strong>中修改此段文字</div><div>某某有限公司</div><div>电 &nbsp;话：0000-888888</div><div>邮 &nbsp;编：000000</div><div>Email：admin@admin.cn</div><div>网 &nbsp;址：www.xxxxx.cn</div>','','','','','','','','','cn');
 INSERT INTO met_parameter VALUES('1','型号','','','1','1','0','1','0','0','0','3','cn','0');
 INSERT INTO met_parameter VALUES('2','品牌','','','2','1','0','1','0','0','0','3','cn','0');
 INSERT INTO met_parameter VALUES('3','价格','','','3','1','1','1','0','0','0','3','cn','0');

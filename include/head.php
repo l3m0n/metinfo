@@ -294,7 +294,7 @@ document.getElementsByTagName('head').item(0).appendChild(jsFile);
 </script>";
 			$query="select * from $met_admin_array where id='$metaccess'";
 			$metaccess=$db->get_one($query);
-			if($_M['config']['shopv2_open'])
+            	if($_M['config']['shopv2_open'] && $_M['user'])
 			{
 				$metinfo_member_type = $_M['user']['access'];
 			}

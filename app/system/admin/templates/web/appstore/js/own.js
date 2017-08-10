@@ -429,7 +429,7 @@ define(function(require, exports, module) {
 			success: function(json){
 				var html='',adu=apppath.split('index.php'),imgsrc='',price='';
 				$.each(json, function(i, item){ 
-					if(i<8){
+					if(i<9){
 						price  = item.price_html;
 						imgsrc = item.icon;
 						var media = $(".hotapplist .media").eq(i);
